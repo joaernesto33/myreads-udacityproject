@@ -19,19 +19,25 @@ class BookSearch extends Component {
   }
 
   clearQuery = () => {
-
     this.setState({ query: '' })
+  }
+
+  handleBookMove = (book, valueShelf) => {
+      console.log(book)
+      console.log(valueShelf);
+      this.props.onShelfChange(book, valueShelf)
   }
 
 
   render(){
     let query = this.state.query
     let showingBooks = this.state.data
-    
+
     if (!(showingBooks instanceof Array)){
       showingBooks = []
     }
 
+    console.log(this.props.booksShelf)
     return(
       <div>
         <div className="search-books">
@@ -47,30 +53,28 @@ class BookSearch extends Component {
             </div>
           </div>
           <div className="search-books-results">
-            {showingBooks && (
-              <ol className="books-grid">
-                  {showingBooks.map((book) => (
-                    <li key={book.id} className='book-list-item'>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
+            <ol className="books-grid">
+                {showingBooks.map((book) => (
+                  <li key={book.id} className='book-list-item' onChange={(event) => this.handleBookMove(book, event.target.value)}>
+                    <div className="book">
+                      <div className="book-top">
+                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                        <div className="book-shelf-changer">
+                          <select>
+                            <option value="none" disabled>Move to...</option>
+                            <option value="currentlyReading">Currently Reading</option>
+                            <option value="wantToRead">Want to Read</option>
+                            <option value="read">Read</option>
+                            <option value="none">None</option>
+                          </select>
                         </div>
-                          <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors}</div>
                       </div>
-                    </li>
-                  ))}
-              </ol>
-            )}
+                        <div className="book-title">{book.title}</div>
+                        <div className="book-authors">{book.authors}</div>
+                    </div>
+                  </li>
+                ))}
+            </ol>
           </div>
         </div>
       </div>
