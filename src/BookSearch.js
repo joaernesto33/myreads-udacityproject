@@ -11,33 +11,42 @@ class BookSearch extends Component {
 
 
   updateQuery = (query) => {
-    BooksAPI.search(query, 5).then((books) => {
-      console.log( `BOOKS ${books}`);
-      this.setState({data:books})
-    })
+    if ( query !== ''){
+      BooksAPI.search(query, 20).then((books) => {
+        this.setState({data:books})
+      })
+    } else{
+      this.setState({data:[]})
+    }
     this.setState({ query: query.trim() })
   }
 
-  clearQuery = () => {
-    this.setState({ query: '' })
-  }
 
   handleBookMove = (book, valueShelf) => {
-      console.log(book)
-      console.log(valueShelf);
       this.props.onShelfChange(book, valueShelf)
   }
 
 
   render(){
     let query = this.state.query
-    let showingBooks = this.state.data
+    let searchBooks = []
+    let shelfBooks = this.props.booksShelf
 
-    if (!(showingBooks instanceof Array)){
-      showingBooks = []
+    if (this.state.data !== undefined && this.state.data.length>0) {
+      searchBooks = this.state.data
+
+      searchBooks.map( book => book.shelf = 'none')
+
+      searchBooks.map( book => {
+        shelfBooks.map( shelfbook => {
+          if (book.id === shelfbook.id)
+            book.shelf = shelfbook.shelf
+        })
+      })
+    } else {
+      searchBooks = []
     }
 
-    console.log(this.props.booksShelf)
     return(
       <div>
         <div className="search-books">
@@ -54,13 +63,13 @@ class BookSearch extends Component {
           </div>
           <div className="search-books-results">
             <ol className="books-grid">
-                {showingBooks.map((book) => (
+                {searchBooks.map((book) => (
                   <li key={book.id} className='book-list-item' onChange={(event) => this.handleBookMove(book, event.target.value)}>
                     <div className="book">
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                          <select>
+                          <select defaultValue={book.shelf}>
                             <option value="none" disabled>Move to...</option>
                             <option value="currentlyReading">Currently Reading</option>
                             <option value="wantToRead">Want to Read</option>
