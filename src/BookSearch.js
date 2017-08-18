@@ -35,10 +35,10 @@ class BookSearch extends Component {
     if (this.state.data !== undefined && this.state.data.length>0) {
       searchBooks = this.state.data
 
-      searchBooks.map( book => book.shelf = 'none')
+      searchBooks.forEach( book => book.shelf = 'none')
 
-      searchBooks.map( book => {
-        shelfBooks.map( shelfbook => {
+      searchBooks.forEach( book => {
+        shelfBooks.forEach( shelfbook => {
           if (book.id === shelfbook.id)
             book.shelf = shelfbook.shelf
         })

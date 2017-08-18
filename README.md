@@ -5,17 +5,14 @@ Myreads project is a bookshelf app that allows you to select and categorize book
 
 Below you will find some information on how to perform common tasks.<br>
 
-##Quick Install
+## Quick Install
 The first thing you should do is install the Node.js dependencies. To install Node.js dependencies you're going to use npm, in the application folder run this in the command-line:
 
 ```
 $ npm install
 ```
 
-##Running the Application
-```
-$ npm start
-```
+## Running the Application
 
 In the project directory, you can run:
 
@@ -49,7 +46,7 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-##Folder Structure
+## Folder Structure
 
 After creation, your project should look like this:
 
@@ -77,5 +74,5 @@ myreads-project/
 
 ```
 
-##Sending Feedback
+## Sending Feedback
 Feel free to send any feedback to joaquin.aparicio@rulesware.com

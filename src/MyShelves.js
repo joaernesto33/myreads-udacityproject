@@ -14,7 +14,7 @@ class MyShelves extends Component {
     crBooks = this.props.books.filter((bk) => bk.shelf === 'currentlyReading')
     wtrBooks = this.props.books.filter((bk) => bk.shelf === 'wantToRead')
     rBooks = this.props.books.filter((bk) => bk.shelf === 'read')
-    
+
     return(
 
 
@@ -118,8 +118,7 @@ class MyShelves extends Component {
               <Link to="/search">Add a book</Link>
             </div>
           </div>
-        )}
-      </div>
+        </div>
     )
   }
 }
